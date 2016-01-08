@@ -8,9 +8,6 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.csrf.CsrfTokenRepository;
-import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
@@ -35,16 +32,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .antMatchers("/adminPage/**").access("hasRole('ROLE_ADMIN')")
         .antMatchers("/guestPage/**").access("hasRole('ROLE_GUEST') or hasRole('ROLE_ADMIN')")
         .and().formLogin().loginPage("/girisYap.xhtml").defaultSuccessUrl("/guestPage/guestPage.xhtml")
-        .usernameParameter("j_username").passwordParameter("j_password")
-        .and().csrf().csrfTokenRepository(csrfTokenRepository());	
+        .usernameParameter("j_username").passwordParameter("j_password");	
       http.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
-    }
-    
-    private CsrfTokenRepository csrfTokenRepository() 
-    { 
-        //Md5PasswordEncoder encoder = new Md5PasswordEncoder();
-        HttpSessionCsrfTokenRepository repository = new HttpSessionCsrfTokenRepository(); 
-        repository.setSessionAttributeName("_csrf");
-        return repository; 
     }
 }

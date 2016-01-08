@@ -13,9 +13,7 @@
 	<h:form prependId="false">
             <center style="margin-top:50px;">
                 <p:panelGrid columns="2">
-                    <f:facet name="header">
-                            <h:graphicImage name="jsfblog.png" library="images"/>
-                    </f:facet>
+                    
                     <h:outputText value="Kullanıcı Adınız:"/>
                     <p:inputText  id="j_username" required="true" requiredMessage="Kullanıcı Adı Boş Geçilemez"/>
 
@@ -29,8 +27,10 @@
                     <h:outputText value=""/>
                 </p:panelGrid>
             </center>
-            <h:outputLabel value="#{sessionScope['SPRING_SECURITY_LAST_EXCEPTION'].message}" rendered="#{!empty sessionScope['SPRING_SECURITY_LAST_EXCEPTION'].message}"
-                                   style="margin-left: 5px;color: red"/>
+            <center>
+                <h:outputLabel value="#{sessionScope['SPRING_SECURITY_LAST_EXCEPTION'].message}" rendered="#{!empty sessionScope['SPRING_SECURITY_LAST_EXCEPTION'].message}"
+                                       style="margin-left: 5px;color: red"/>
+            </center>
 	</h:form>
 </h:body> 
 </html>
